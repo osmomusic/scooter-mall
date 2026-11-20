@@ -1070,7 +1070,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .dLang button[aria-pressed=true]{border-color:var(--signal);color:var(--signal)}
 @media (max-width:760px){
   .menuBtn{display:inline-flex!important;order:-1;margin-inline-start:-6px}
-  header.top nav.cats{display:none}
+  header.top{position:relative}
+  header.top nav.cats{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;overflow:visible;padding:8px 0 10px;border-top:1px solid #3a3a3a}
+  header.top nav.cats button{padding:0 12px!important;min-height:38px;font-size:15px!important;border:1.5px solid #555;border-bottom-width:1.5px;border-radius:20px;color:#E6E6E6;background:#333}
+  header.top nav.cats button[aria-pressed=true]{background:var(--signal);border-color:var(--signal);color:#fff}
   header.top .langW,#shareSite{display:none!important}
   .hdr{gap:6px!important}
   .logo .limg{height:52px!important}

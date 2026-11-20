@@ -1,5 +1,5 @@
 /* Service worker: האתר נטען מהרשת, ובלי חיבור מוצגת הגרסה האחרונה שנשמרה */
-const C='scooter-mall-v1';
+const C='scooter-mall-v2';
 const CORE=['./','index.html','logo-text.webp','logo-text.png','icons/icon-192.png','manifest.webmanifest'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});
