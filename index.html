@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 52 42%27%3E%3Cpolygon points=%2710,0 52,0 42,42 0,42%27 fill=%27%23D10A0A%27/%3E%3Cg fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273.5%27 stroke-linecap=%27round%27%3E%3Cpath d=%27M8 9h9M13 9l3.5 21M16.5 30H34%27/%3E%3Ccircle cx=%2714%27 cy=%2732%27 r=%275%27/%3E%3Ccircle cx=%2736%27 cy=%2732%27 r=%275%27/%3E%3C/g%3E%3C/svg%3E">
-<meta name="theme-color" content="#1A1A1A">
+<meta name="theme-color" content="#2B2B2B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="קניון קורקינטים">
+<meta name="format-detection" content="telephone=no">
 <title>קורקינטים יד שניה | אינוקים יד שניה וחדש – קרית מוצקין והקריות | הקניון הגדול לקורקינטים</title>
 <meta name="description" content="קורקינטים יד שניה של INOKIM ישירות מהסניפים: אינוקים יד שניה שנבדקו בסניף, אינוקים חדש, חלקים, בקרים, מנועים ואביזרים. סניף קרית מוצקין אינוקים, קורקינטים בקריות ובצפון.">
 <meta name="keywords" content="קורקינטים יד שניה, אינוקים יד שניה, אינוקים חדש, אינוקים קרית מוצקין, קורקינטים קרית מוצקין, קורקינטים בקריות, אינוקים בקריות, סניף קרית מוצקין אינוקים, INOKIM יד שניה, קורקינט חשמלי יד שניה, קורקינטים קריית מוצקין, חלקים לקורקינט INOKIM">
@@ -382,9 +390,9 @@ footer .fine{grid-column:1/-1;border-top:1px solid #333;padding-top:16px;font-si
   <div class="wrap">
     <div><h5>הקניון הגדול לקורקינטים יד שניה</h5><p>קורקינטי INOKIM יד שניה שנבדקו ונמכרים ישירות מסניפי INOKIM. חלקים ואביזרים חדשים בלבד, דרך סניף קריית מוצקין.</p></div>
     <div><h5>שירותים</h5><ul><li>נסיעת מבחן בסניף</li><li>מכירת קורקינט לסניף</li><li>התקנת חלקים בסניף</li></ul></div>
-    <div><h5>דברו איתנו</h5><ul><li>סניפים: רמת גן · חיפה · קריית מוצקין</li><li>וואטסאפ <span class="sitePhone">050-5788881</span></li><li>ראשון עד חמישי, 9:00–19:00</li></ul></div>
+    <div><h5>דברו איתנו</h5><ul><li>סניפים: רמת גן · חיפה · קריית מוצקין</li><li>טלפון: <a class="ftel" href="tel:+972505788881" dir="ltr"><span class="sitePhone">050-5788881</span></a></li><li><a class="ftel" href="https://wa.me/972505788881" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></li><li>ראשון עד חמישי, 9:00–19:00</li></ul></div>
     <p class="fine">בישראל, קורקינט שנוסע בדרך מוגבל ל-25 קמ״ש ול-250W ונדרש תו תקן. INOKIM הוא סימן מסחרי של בעליו. חלק ממודעות היד השניה מוצגות לדוגמה.</p>
-    <div class="flinks"><button type="button" data-legal="a11y">הצהרת נגישות</button><button type="button" data-legal="privacy">מדיניות פרטיות ועוגיות</button><button type="button" data-cookieset>הגדרות עוגיות</button></div>
+    <div class="flinks"><button type="button" id="installBtn" hidden>📲 התקנה כאפליקציה בטלפון</button><button type="button" data-legal="a11y">הצהרת נגישות</button><button type="button" data-legal="privacy">מדיניות פרטיות ועוגיות</button><button type="button" data-cookieset>הגדרות עוגיות</button></div>
   </div>
 </footer>
 
@@ -1022,6 +1030,24 @@ setTimeout(openFromHash,50);
 @media (min-width:761px){header.top .hdr{height:94px}}
 @media (max-width:760px){.logo .limg{height:54px}header.top .hdr{height:66px!important}}
 @media (max-width:420px){.logo{padding:2px 4px}.logo .limg{height:50px}}
+
+/* iPhone / Android */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:rgba(209,10,10,.18);overscroll-behavior-y:none}
+input,select,textarea,button{font-family:inherit;border-radius:0}
+input,select,textarea{-webkit-appearance:none;appearance:none}
+input[type=checkbox]{-webkit-appearance:auto;appearance:auto}
+@media (max-width:760px){input,select,textarea{font-size:16px!important}}
+img{-webkit-user-drag:none}
+.modal{-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+@supports (height:100dvh){@media (max-width:760px){.modal{max-height:100dvh}}}
+header.top{padding-top:env(safe-area-inset-top)}
+.wrap{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+footer{padding-bottom:env(safe-area-inset-bottom)}
+.ftel{color:#fff;text-decoration:underline;text-underline-offset:3px;display:inline-block;min-height:32px;line-height:32px}
+.ckBar p button{min-height:32px}
+@media (display-mode:standalone){#installBtn{display:none!important}}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5l6 6 6-6' fill='none' stroke='%23262626' stroke-width='2.4'/%3E%3C/svg%3E")!important;background-position:left 12px center!important;background-size:14px 9px!important;background-repeat:no-repeat!important;padding-left:34px!important}
 /* שפות */
 .langW{position:relative}
 .lc{font-size:13px;font-weight:800}
@@ -1198,6 +1224,19 @@ html.a-spacing p,html.a-spacing li,html.a-spacing label,html.a-spacing .desc{lin
     document.cookie=`googtrans=${v};path=/;${exp}`;
     document.cookie=`googtrans=${v};path=/;domain=.${location.hostname};${exp}`;
     location.reload();});
+
+
+  /* ---------- אפליקציה (PWA) ---------- */
+  if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+  const ib=$('#installBtn');let deferred=null;
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;ib.hidden=false;});
+  if(isIOS&&!standalone)ib.hidden=false;
+  ib.onclick=async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;ib.hidden=true;return;}
+    openModal(`<div class="mhead"><h2 id="mTitle">התקנה באייפון</h2><button class="x" data-close aria-label="סגירה">✕</button></div>
+    <div class="legal" style="padding:4px 18px 22px"><ol style="padding-inline-start:22px;line-height:2">
+    <li>פתחו את האתר ב-Safari.</li><li>לחצו על כפתור השיתוף <b>⬆︎</b> בתחתית המסך.</li><li>בחרו <b>"הוסף למסך הבית"</b>.</li><li>לחצו <b>"הוסף"</b>. האייקון של הקניון יופיע במסך הבית.</li></ol></div>`);};
 
   /* ---------- מסמכים ---------- */
   const DOCS={
