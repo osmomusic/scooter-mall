@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://osmomusic.github.io/scooter-mall/sitemap.xml
