@@ -299,6 +299,7 @@ footer .fine{grid-column:1/-1;border-top:1px solid #333;padding-top:16px;font-si
 <header class="top">
   <div class="wrap">
     <div class="hdr">
+      <button class="hbtn menuBtn" id="menuBtn" type="button" aria-label="פתיחת התפריט" aria-expanded="false" aria-controls="drawer"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
       <a class="logo" href="#top" aria-label="הקניון הגדול לקורקינטים יד שניה מבית INOKIM – לדף הבית"><picture><source srcset="logo-text.webp" type="image/webp"><img class="limg" src="logo-text.png" alt="" width="472" height="200" fetchpriority="high"></picture></a>
       <span class="hsp"></span>
       <button class="hbtn" id="adminBtn" hidden><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8-3 2-1-1-3-2.2.2-1.4-1.4L17.6 5 14.6 4 13.5 6h-3L9.4 4 6.4 5l.2 2.2L5.2 8.6 3 8.4 2 11.4 4 12.5v1L2 14.6l1 3 2.2-.2 1.4 1.4-.2 2.2 3 1 1.1-2h3l1.1 2 3-1-.2-2.2 1.4-1.4 2.2.2 1-3-2-1.1z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="l">ניהול</span></button>
@@ -1048,6 +1049,32 @@ footer{padding-bottom:env(safe-area-inset-bottom)}
 .ckBar p button{min-height:32px}
 @media (display-mode:standalone){#installBtn{display:none!important}}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5l6 6 6-6' fill='none' stroke='%23262626' stroke-width='2.4'/%3E%3C/svg%3E")!important;background-position:left 12px center!important;background-size:14px 9px!important;background-repeat:no-repeat!important;padding-left:34px!important}
+
+/* תפריט צד בסלולר */
+.menuBtn{display:none!important}
+.dOv{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.dOv.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;right:0;width:min(330px,86vw);z-index:81;background:#fff;color:var(--ink);overflow-y:auto;overscroll-behavior:contain;transform:translateX(105%);transition:transform .25s ease;padding:0 0 calc(20px + env(safe-area-inset-bottom));box-shadow:-8px 0 0 var(--signal);visibility:hidden}
+.drawer.on{transform:none;visibility:visible}
+.dHead{display:flex;justify-content:space-between;align-items:center;background:#2B2B2B;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+.dHead b{font-size:20px;font-weight:900}
+.dHead button{color:#fff;width:44px;height:44px;font-size:22px}
+.dCats,.dAct{list-style:none;margin:0;padding:6px 0}
+.dCats button{display:block;width:100%;text-align:start;padding:0 18px;min-height:52px;font-size:18px;font-weight:700;border-bottom:1px solid var(--line);color:var(--ink)}
+.dCats button[aria-current=true]{color:var(--signal);border-inline-start:5px solid var(--signal);background:var(--tarmac)}
+.dAct{border-top:6px solid var(--tarmac)}
+.dAct button,.dAct a{display:flex;align-items:center;gap:6px;width:100%;text-align:start;padding:0 18px;min-height:48px;font-size:16px;font-weight:600;color:var(--ink);text-decoration:none}
+.dAct.small button{font-size:15px;min-height:44px;color:var(--gray)}
+.dLang{display:flex;gap:6px;padding:10px 18px;border-top:6px solid var(--tarmac)}
+.dLang button{flex:1;min-height:44px;border:2px solid var(--line);font-weight:700}
+.dLang button[aria-pressed=true]{border-color:var(--signal);color:var(--signal)}
+@media (max-width:760px){
+  .menuBtn{display:inline-flex!important;order:-1;margin-inline-start:-6px}
+  header.top nav.cats{display:none}
+  header.top .langW,#shareSite{display:none!important}
+  .hdr{gap:6px!important}
+  .logo .limg{height:52px!important}
+}
 /* שפות */
 .langW{position:relative}
 .lc{font-size:13px;font-weight:800}
@@ -1130,6 +1157,27 @@ html.a-spacing p,html.a-spacing li,html.a-spacing label,html.a-spacing .desc{lin
 .flinks button{color:#fff;text-decoration:underline;text-underline-offset:3px;font-size:14px;min-height:36px;font-weight:600}
 </style>
 
+
+<div class="dOv" id="dOv"></div>
+<aside class="drawer" id="drawer" aria-label="תפריט ראשי" aria-hidden="true">
+  <div class="dHead"><b>תפריט</b><button type="button" id="dClose" aria-label="סגירת התפריט">✕</button></div>
+  <nav aria-label="קטגוריות"><ul class="dCats" id="dCats"></ul></nav>
+  <ul class="dAct">
+    <li><button type="button" data-go="fav">♡ המועדפים שלי</button></li>
+    <li><button type="button" data-go="post">מכירת קורקינט לסניף / טרייד-אין</button></li>
+    <li><button type="button" data-go="share">שיתוף האתר עם חברים</button></li>
+    <li><a href="tel:+972505788881">📞 התקשרו: <span dir="ltr">050-5788881</span></a></li>
+    <li><a href="https://wa.me/972505788881" target="_blank" rel="noopener">💬 כתבו לנו בוואטסאפ</a></li>
+  </ul>
+  <div class="dLang" role="group" aria-label="שפה / Language / Язык"><button type="button" data-l="he" lang="he">עברית</button><button type="button" data-l="en" lang="en">English</button><button type="button" data-l="ru" lang="ru">Русский</button></div>
+  <ul class="dAct small">
+    <li><button type="button" data-go="a11y">♿ תפריט נגישות</button></li>
+    <li><button type="button" data-legal="a11y">הצהרת נגישות</button></li>
+    <li><button type="button" data-legal="privacy">מדיניות פרטיות ועוגיות</button></li>
+    <li><button type="button" data-cookieset>הגדרות עוגיות</button></li>
+    <li><button type="button" data-go="install" id="dInstall" hidden>📲 התקנה כאפליקציה</button></li>
+  </ul>
+</aside>
 <div class="ckBar" id="ckBar" role="region" aria-label="הודעת עוגיות">
   <h2>האתר משתמש בעוגיות</h2>
   <p>אנחנו שומרים בדפדפן שלכם מידע הכרחי לפעולת האתר, כמו מועדפים והגדרות נגישות. עוגיות סטטיסטיקה ושיווק יופעלו רק אם תאשרו. <button type="button" data-legal="privacy">מדיניות פרטיות ועוגיות</button></p>
@@ -1237,6 +1285,21 @@ html.a-spacing p,html.a-spacing li,html.a-spacing label,html.a-spacing .desc{lin
     openModal(`<div class="mhead"><h2 id="mTitle">התקנה באייפון</h2><button class="x" data-close aria-label="סגירה">✕</button></div>
     <div class="legal" style="padding:4px 18px 22px"><ol style="padding-inline-start:22px;line-height:2">
     <li>פתחו את האתר ב-Safari.</li><li>לחצו על כפתור השיתוף <b>⬆︎</b> בתחתית המסך.</li><li>בחרו <b>"הוסף למסך הבית"</b>.</li><li>לחצו <b>"הוסף"</b>. האייקון של הקניון יופיע במסך הבית.</li></ol></div>`);};
+
+
+  /* ---------- תפריט צד ---------- */
+  const dr=$('#drawer'),dov=$('#dOv'),mb=$('#menuBtn');
+  const fillCats=()=>{$('#dCats').innerHTML=$$('#cats button').map(b=>`<li><button type="button" data-cat="${b.dataset.cat}" aria-current="${b.getAttribute('aria-pressed')==='true'}">${b.textContent}</button></li>`).join('');};
+  const openD=v=>{if(v)fillCats();dr.classList.toggle('on',v);dov.classList.toggle('on',v);dr.setAttribute('aria-hidden',!v);mb.setAttribute('aria-expanded',v);document.body.style.overflow=v?'hidden':'';if(v)setTimeout(()=>$('#dClose').focus(),50);else mb.focus();};
+  mb.onclick=()=>openD(true);$('#dClose').onclick=()=>openD(false);dov.onclick=()=>openD(false);
+  dr.addEventListener('keydown',e=>{if(e.key==='Escape')openD(false);});
+  $$('#drawer .dLang button').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.l===cur);b.onclick=()=>{const t=document.querySelector(`#langM [data-lang=${b.dataset.l}]`);t&&t.click();};});
+  dr.addEventListener('click',e=>{
+    if(e.target.closest('[data-cat]')){setTimeout(()=>{openD(false);const r=document.getElementById('results');r&&r.scrollIntoView({behavior:'smooth'});},0);return;}
+    if(e.target.closest('[data-legal],[data-cookieset]')){dr.classList.remove('on');dov.classList.remove('on');document.body.style.overflow='';return;}
+    const g=e.target.closest('[data-go]');if(!g)return;const k=g.dataset.go;openD(false);
+    setTimeout(()=>{if(k==='fav')$('#favBtn').click();else if(k==='post')$('#postBtn').click();else if(k==='share')$('#shareSite').click();else if(k==='a11y')$('#a11yBtn').click();else if(k==='install')ib.click();},60);});
+  const syncInst=()=>{$('#dInstall').hidden=ib.hidden;};syncInst();new MutationObserver(syncInst).observe(ib,{attributes:true});
 
   /* ---------- מסמכים ---------- */
   const DOCS={
