@@ -1027,7 +1027,7 @@ setTimeout(openFromHash,50);
 #gtEl,.goog-te-banner-frame,iframe.skiptranslate,#goog-gt-tt,.goog-te-balloon-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf{display:none!important}
 body{top:0!important}
 font[style]{background:none!important;box-shadow:none!important}
-html[dir=ltr] .logo b i{display:inline-block;transform:scaleX(-1)}
+html.tr-en body,html.tr-ru body{text-align:start}
 @media (max-width:420px){.lc{display:none}.logo b{font-size:14px!important;white-space:normal;line-height:1.1;max-width:none}.logo b i{display:block;height:0;overflow:hidden;margin:0}.logo .mark{width:32px!important;height:26px!important}.logo{gap:5px!important;flex:1 1 auto}.post{padding:0 9px!important}.hsp{display:none}.logo b i{margin:0 2px}.logo small{display:none}.hdr{gap:2px!important}.hbtn{padding:0 6px!important;min-width:38px!important}}
 
 /* טקסט מואר יותר */
@@ -1177,9 +1177,10 @@ html.a-spacing p,html.a-spacing li,html.a-spacing label,html.a-spacing .desc{lin
   const lb=$('#langBtn'),lm=$('#langM');
   $('#langCode').textContent=LN[cur];
   $$('#langM [data-lang]').forEach(b=>b.setAttribute('aria-checked',b.dataset.lang===cur));
-  if(cur!=='he'){document.documentElement.lang=cur;document.documentElement.dir='ltr';
+  if(cur!=='he'){document.documentElement.classList.add('tr-'+cur);
     const d=document.createElement('div');d.id='gtEl';document.body.appendChild(d);
-    window.gtInit=()=>{try{new google.translate.TranslateElement({pageLanguage:'he',includedLanguages:'en,ru',autoDisplay:false},'gtEl');}catch(e){}};
+    window.gtInit=()=>{try{new google.translate.TranslateElement({pageLanguage:'iw',includedLanguages:'en,ru',autoDisplay:false},'gtEl');}catch(e){}
+      let n=0;const t=setInterval(()=>{const c=document.querySelector('.goog-te-combo');if(c&&c.options.length>1){clearInterval(t);if(c.value!==cur){c.value=cur;c.dispatchEvent(new Event('change'));}}else if(++n>60)clearInterval(t);},150);};
     const sc=document.createElement('script');sc.src='https://translate.google.com/translate_a/element.js?cb=gtInit';sc.onerror=()=>toast&&toast('Translation is unavailable right now');document.body.appendChild(sc);}
   const showM=v=>{lm.classList.toggle('on',v);lb.setAttribute('aria-expanded',v);if(v)lm.querySelector('[aria-checked=true]').focus();};
   lb.onclick=e=>{e.stopPropagation();showM(!lm.classList.contains('on'));};
